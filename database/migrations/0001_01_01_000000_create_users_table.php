@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['admin', 'superadmin', 'user'])->default('user');
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
+            $table->string('barangay')->nullable();
+            $table->string('profile_photo')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });
