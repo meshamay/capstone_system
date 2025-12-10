@@ -5,17 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DocumentRequest;
 
-class DocumentRequestController extends Controller
+class UserDocumentRequestController extends Controller
 {
-    // User: View all their document requests in a table
-    public function userTable()
-    {
-        $user = auth()->user();
-        $requests = DocumentRequest::where('user_id', $user ? $user->id : null)
-            ->orderBy('created_at', 'desc')
-            ->get();
-            return view('user.document-req.table', compact('requests'));
-    }
     // User: View document request form
     public function userIndex()
     {
@@ -46,24 +37,4 @@ class DocumentRequestController extends Controller
         return redirect()->back()->with('success', 'Document request submitted successfully!');
     }
 
-    // Superadmin: View all document requests
-    public function superadminIndex()
-    {
-        $requests = DocumentRequest::orderBy('created_at', 'desc')->get();
-        return view('superadmin.documents.index', compact('requests'));
-    }
-
-    // Superadmin: Update request status
-    public function updateStatus(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'status' => 'required|in:pending,processing,approved,rejected',
-            'admin_notes' => 'nullable|string'
-        ]);
-
-        $documentRequest = DocumentRequest::findOrFail($id);
-        $documentRequest->update($validated);
-
-        return redirect()->back()->with('success', 'Request status updated successfully!');
-    }
 }

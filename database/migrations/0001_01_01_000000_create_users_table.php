@@ -1,3 +1,4 @@
+// ADMIN & USER MIGRATION: Users
 <?php
 
 use Illuminate\Database\Migrations\Migration;

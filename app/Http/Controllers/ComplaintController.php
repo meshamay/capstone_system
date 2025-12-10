@@ -38,24 +38,4 @@ class ComplaintController extends Controller
         return redirect()->back()->with('success', 'Complaint filed successfully!');
     }
 
-    // Superadmin: View all complaints
-    public function superadminIndex()
-    {
-        $complaints = Complaint::orderBy('created_at', 'desc')->get();
-        return view('superadmin.complaints.index', compact('complaints'));
-    }
-
-    // Superadmin: Update complaint status
-    public function updateStatus(Request $request, $id)
-    {
-        $validated = $request->validate([
-            'status' => 'required|in:pending,investigating,resolved,dismissed',
-            'admin_notes' => 'nullable|string'
-        ]);
-
-        $complaint = Complaint::findOrFail($id);
-        $complaint->update($validated);
-
-        return redirect()->back()->with('success', 'Complaint status updated successfully!');
-    }
 }

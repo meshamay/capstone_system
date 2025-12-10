@@ -1,3 +1,4 @@
+// USER MIGRATION: Document Requests
 <?php
 
 use Illuminate\Database\Migrations\Migration;

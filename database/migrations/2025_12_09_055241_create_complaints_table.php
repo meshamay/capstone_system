@@ -1,3 +1,4 @@
+// USER MIGRATION: Complaints
 <?php
 
 use Illuminate\Database\Migrations\Migration;
