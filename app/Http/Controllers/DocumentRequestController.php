@@ -7,6 +7,15 @@ use App\Models\DocumentRequest;
 
 class DocumentRequestController extends Controller
 {
+    // User: View all their document requests in a table
+    public function userTable()
+    {
+        $user = auth()->user();
+        $requests = DocumentRequest::where('user_id', $user ? $user->id : null)
+            ->orderBy('created_at', 'desc')
+            ->get();
+            return view('user.document-req.table', compact('requests'));
+    }
     // User: View document request form
     public function userIndex()
     {

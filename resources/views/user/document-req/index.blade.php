@@ -555,39 +555,6 @@
   </div>
 </div>
 
-<!-- SUCCESS MODAL -->
-<div id="successModal" class="hidden fixed inset-0 bg-black/30 backdrop-blur-none flex items-center justify-center z-50">
-
-  <div class="bg-[#DDE1E5] w-[480px] rounded-2xl shadow-xl p-10 border-2 border-black relative z-50 text-center">
-
-      <div class="flex justify-center mb-4">
-        <div class="w-20 h-20 rounded-full border-4 border-green-700 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-green-700" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-      </div>
-
-      <h2 class="font-extrabold text-xl mb-3 text-black tracking-wide">
-        REQUEST SUBMITTED SUCCESSFULLY!
-      </h2>
-     
-      <p class="text-xs text-black leading-relaxed mb-1">
-        Thank you, your Document Request has been received.
-      </p>
-     <br>
-      <p class="text-xs text-black leading-relaxed">
-        Your request will be processed within 1 day. You may claim your
-        document at the barangay once it’s ready for release.
-      </p>
-
-      <button onclick="closeSuccessModal()" 
-              class="mt-7 bg-[#A2C4D9] hover:bg-[#94B8CC] px-7 py-1 rounded-2xl text-sm font-semibold text-black transition">
-        CLOSE
-      </button>
-  </div>
-
-</div>
 
 
 
@@ -654,11 +621,12 @@ document.querySelectorAll('[id^="modal"]').forEach(modal => {
   });
 });
 
-// Submit request: close modal and show success modal
+// Submit request: close modal and re-open modal after submission
 function submitRequest(modalId) {
   closeModal(modalId);
-  document.getElementById("successModal").classList.remove("hidden");
-  pageContent.classList.add('blur-sm'); // keep blur while success modal is open
+  setTimeout(function() {
+    openModal(modalId);
+  }, 500); // Reopen modal after short delay
 }
 
 // Submit Certificate form
@@ -755,11 +723,7 @@ function submitIndigencyForm() {
   document.getElementById('formIndigency').submit();
 }
 
-// Close success modal and remove blur
-function closeSuccessModal() {
-  document.getElementById("successModal").classList.add("hidden");
-  pageContent.classList.remove('blur-sm');
-}
+// Remove closeSuccessModal function since success modal is removed
 
 // Profile icon redirect
 document.addEventListener('DOMContentLoaded', () => {
